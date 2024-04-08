@@ -1,36 +1,33 @@
+class Counter extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            count: 0
+        };
+    }
 
-class HeaderComponent extends React.Component {
-
-    anotherMethod(){
+    increment(){
+        //todo: state.count++;
+        this.setState({
+            count: this.state.count +1
+        })
 
     }
 
-    render(){ //єдиний метод який зобоввязані визначити в класі
-        const p = React.createElement('p',{}, 'Super paragraph');
-        const h2 = React.createElement('h2', {title: 'hi!'}, `HELLO ${this.props.name}`);
-        const article = React.createElement('article', {},h2,p)
-
-        return article;
+    render(){
+        const h2 = React.createElement('h2',{}, this.state.count);
+        const button = React.createElement('button',{onClick:()=>{this.increment()}},'+')
+        return React.createElement(React.Fragment, {}, h2, button);
     }
 }
 
-const component = React.createElement(HeaderComponent, {name: 'JOhn'}, 'TEXT--JOHN');
+const component = React.createElement(Counter)
 
-const component2 = React.createElement(HeaderComponent, {name: 'TOHA'},'TEXT--TOHA');
+const root = document.querySelector('#root');
 
-const parentElement = React.createElement('section',{}, component, component2)
-
-
+ReactDOM.render(component, root)
 
 
-
-
-
-
-
-const root = document.querySelector('#root')
-
-ReactDOM.render(parentElement,  root)
 /*
 1. Реакт - бібілотека для створення користувацьких інтерфейсів
 2. Ви можете використовувати як звичайний "ванільний" JS, так можете використовувати і Реакт. Це може відбуватись одночасно
