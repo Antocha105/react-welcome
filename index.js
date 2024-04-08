@@ -2,22 +2,38 @@ class Counter extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            count: 0
+            count: 0,
+            step: 1
         };
     }
 
     increment(){
         //todo: state.count++;
+        if(this.state.count>=0){
         this.setState({
-            count: this.state.count +1
-        })
+            count: this.state.count +this.state.step
+        })}
 
     }
 
+    decrement(){
+        if(this.state.count>0){
+        this.setState({
+            count:this.state.count -this.state.step
+        })}
+    }
+
     render(){
-        const h2 = React.createElement('h2',{}, this.state.count);
+        const h2 = React.createElement('h2',{}, `Значення лічильника: ${this.state.count}`);
+        const step =React.createElement('h2',{}, `Значення лічильника: ${this.state.step}`)
         const button = React.createElement('button',{onClick:()=>{this.increment()}},'+')
-        return React.createElement(React.Fragment, {}, h2, button);
+        const button2 = React.createElement('button',{onClick:()=>{this.decrement()}},'-')
+        const setStepButton = React.createElement('button',{onClick:()=>{
+            this.setState({
+                step:Number(prompt('Введіть значення кроку:'))
+            })
+        }},'Крок лічильника')
+        return React.createElement(React.Fragment, {},h2, Counter, button, button2, step, setStepButton);
     }
 }
 
